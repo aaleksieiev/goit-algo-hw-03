@@ -5,7 +5,7 @@ import os
 
 def copy_files(src_path: Path, dist_path: Path):
     for item in src_path.iterdir():
-        if item.is_file():
+        if item.is_file() and os.access(item, os.R_OK):
             file_ext = item.suffix.lstrip('.')
             new_dir = dist_path / file_ext
             if not new_dir.exists():
