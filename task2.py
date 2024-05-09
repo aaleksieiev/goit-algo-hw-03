@@ -1,39 +1,38 @@
-import turtle
+from turtle import *
 import argparse
-
-def koch_curve(turtle, line_length, depth):
-    if depth <= 0:
-        turtle.forward(line_length)
-    else:
-        koch_curve(turtle, line_length / 3, depth - 1)
-        turtle.left(60)
-        koch_curve(turtle, line_length / 3, depth - 1)
-        turtle.right(120)
-        koch_curve(turtle, line_length / 3, depth - 1)
-        turtle.left(60)
-        koch_curve(turtle, line_length / 3, depth - 1)
-
-def main():
-    parser = argparse.ArgumentParser(description="Koch snowflake")
-    parser.add_argument("-d", "--depth", required=False, default=4, help="depth")
-
-    args = parser.parse_args()
-
-    # Set up the window and turtle.
-    win = turtle.Screen()
-    win.bgcolor("white")
-
-    koch_turtle = turtle.Turtle()
-    koch_turtle.speed(0)  # Fastest speed.
-
-    # Initial positioning.
-    koch_turtle.penup()
-    koch_turtle.goto(-300, 200)
-    koch_turtle.pendown()
-
-    koch_curve(koch_turtle, 500, args.depth)
-
-    turtle.done()
-
+import argparse
+  
+def snowflake(lengthSide, levels): 
+    if levels == 0: 
+        forward(lengthSide) 
+        return
+    lengthSide /= 3.0
+    snowflake(lengthSide, levels-1) 
+    left(60) 
+    snowflake(lengthSide, levels-1) 
+    right(120) 
+    snowflake(lengthSide, levels-1) 
+    left(60) 
+    snowflake(lengthSide, levels-1) 
+  
+# main function 
 if __name__ == "__main__":
-    main()
+
+    parser = argparse.ArgumentParser(description="Koch snowflake")
+    parser.add_argument("-d", "--depth", required=False, default=1, help="depth")
+    args = parser.parse_args()
+    
+    speed(0)                    
+    length = 300.0   
+             
+    penup()                      
+  
+    backward(length/2.0) 
+  
+    # Pull the pen down – drawing when moving.         
+    pendown()            
+    for i in range(3):     
+        snowflake(length, args.depth) 
+        right(120) 
+
+    done()
