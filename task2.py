@@ -28,8 +28,7 @@ if __name__ == "__main__":
     penup()                      
   
     backward(length/2.0) 
-  
-    # Pull the pen down – drawing when moving.         
+           
     pendown()            
     for i in range(3):     
         snowflake(length, args.depth) 
